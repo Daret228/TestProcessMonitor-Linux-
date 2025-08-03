@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Test Monitor Script Every Minute
+
+[Timer]
+OnBootSec=1min         # первый запуск через 1 минуту после загрузки
+OnUnitActiveSec=1min   # затем — каждые 1 минуту
+AccuracySec=10s        # погрешность 10 сек
+Persistent=true        # если компьютер был выключен — запустит пропущенные срабатывания
+
+[Install]
+WantedBy=timers.target
