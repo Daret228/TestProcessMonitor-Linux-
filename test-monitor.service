@@ -1,8 +1,17 @@
 [Unit]
+# Описание юнита, будет видно в systemctl и журналах.
 Description=Monitor test process (one-shot)
+
+# Указываем, что перед запуском нашего сервиса нужно, чтобы была готова сеть.
+# Это важно, так как скрипт стучится по https.
 Wants=network-online.target
 After=network-online.target
 
 [Service]
+# Тип сервиса "oneshot" означает, что systemd запустит команду (ExecStart),
+# дождётся её завершения и не будет держать юнит запущенным постоянно.
+# Это идеально для коротких скриптов, которые должны отработать и выйти.
 Type=oneshot
+
+# Путь к нашему Bash-скрипту, который будет запускаться при каждом срабатывании таймера.
 ExecStart=/usr/local/bin/test_monitor.sh
